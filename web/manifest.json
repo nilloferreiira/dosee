@@ -1,6 +1,6 @@
 {
-    "name": "me_project",
-    "short_name": "me_project",
+    "name": "dosee",
+    "short_name": "dosee",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,4 +1,4 @@
-package com.example.me_project
+package com.example.dosee
 
 import io.flutter.embedding.android.FlutterActivity
 

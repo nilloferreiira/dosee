@@ -1,3 +1,3 @@
-# me_project
+# Dosee
 
-A new Flutter project.
+Never forget your pills.
