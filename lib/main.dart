@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:dosee/screens/auth/login_screen.dart';
+import 'package:dosee/screens/auth/welcome_screen.dart';
+import 'package:dosee/screens/home_screen.dart';
+import 'package:dosee/screens/team/team_screen.dart';
+
+void main() {
+  // MultiProvider
+
+  runApp(const MainApp());
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'ME Project',
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black, // fundo mais escuro
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
+      ),
+      //TODO se tiver login no context ent redireciona direto para /home
+      initialRoute: "/welcome",
+      routes: {
+        '/welcome': (context) => WelcomeScreen(),
+        '/login': (context) => LoginScreen(),
+        '/': (context) => HomeScreen(),
+        '/team': (context) => TeamScreen(),
+      },
+    );
+  }
+}

@@ -1,0 +1,32 @@
+name: dosee
+description: "Never forget your dose"
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_native_splash: ^2.4.6
+  gap: ^3.0.1
+  provider: ^6.1.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/image.png
+    - assets/images/splash.png
+
+flutter_native_splash:
+  color: "#000000" # cor de fundo
+  image: assets/images/splash.png # logo central
+  android: true
+  ios: true
+  web: false
