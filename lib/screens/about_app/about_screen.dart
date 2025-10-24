@@ -1,3 +1,4 @@
+import 'package:dosee/components/logo.dart';
 import 'package:dosee/components/ui/private/app_bar_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,32 +18,15 @@ class AboutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 32,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 16,
-                children: [
-                  SizedBox(
-                    width: 64,
-                    height: 64,
-                    child: Image.asset('assets/images/pill-3.png'),
-                  ),
-                  Text(
-                    'Dosee',
-                    style: TextStyle(
-                      fontSize: 48,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.5,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+              DoseeLogo(),
               Text(
                 "Seu companheiro no controle das medicações",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
               ),
+              //* Texto sobre o app
+              //* Como funciona
+              // Elevetaded button conheça nossa equipe
             ],
           ),
         ),
