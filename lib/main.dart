@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      //TODO se tiver login no context ent redireciona direto para /home
+      // se tiver login no context ent redireciona direto para /home
       initialRoute: "/welcome",
       routes: {
         '/welcome': (context) => WelcomeScreen(),

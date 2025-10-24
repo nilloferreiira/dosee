@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Iniciar Pixel 4",
+			"type": "shell",
+			"command": "emulator -avd Pixel_4",
+			"problemMatcher": []
+		},
+		{
+			"label": "Iniciar Medium Phone",
+			"type": "shell",
+			"command": "emulator -avd Medium_Phone_API_36.1_-_ja_veio_instalado",
+			"problemMatcher": []
+		}
+	]
+}

@@ -3,7 +3,6 @@ import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
-import 'package:dosee/components/ui/buttons/app_outlined_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

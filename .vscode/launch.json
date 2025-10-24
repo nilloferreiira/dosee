@@ -1,0 +1,25 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Flutter no Linux",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main.dart"
+		},
+		{
+			"name": "Flutter no Pixel 4",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main.dart",
+			"preLaunchTask": "Iniciar Pixel 4"
+		},
+		{
+			"name": "Flutter no Medium Phone",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main.dart",
+			"preLaunchTask": "Iniciar Medium Phone"
+		}
+	]
+}
