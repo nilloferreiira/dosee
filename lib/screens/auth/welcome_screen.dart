@@ -1,4 +1,5 @@
 import 'package:dosee/components/logo.dart';
+import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
@@ -36,13 +37,23 @@ class WelcomeScreen extends StatelessWidget {
               Gap(16),
               SizedBox(
                 width: double.infinity,
-                child: AppOutlinedButton(
+                child: AppElevatedButton(
+                  color: AppColors.bluePrimary,
                   onPressed: () {
                     Navigator.pushNamed(context, '/register');
                   },
                   text: "Cadastrar-se",
                 ),
               ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: AppOutlinedButton(
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, '/register');
+              //     },
+              //     text: "Cadastrar-se",
+              //   ),
+              // ),
             ],
           ),
         ),
