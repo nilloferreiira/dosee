@@ -15,11 +15,17 @@ class AboutScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 32,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 16,
                 children: [
-                  Icon(Icons.medication_rounded),
+                  SizedBox(
+                    width: 64,
+                    height: 64,
+                    child: Image.asset('assets/images/pill-3.png'),
+                  ),
                   Text(
                     'Dosee',
                     style: TextStyle(

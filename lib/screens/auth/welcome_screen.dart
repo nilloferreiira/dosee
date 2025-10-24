@@ -1,3 +1,4 @@
+import 'package:dosee/components/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
@@ -16,17 +17,8 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Gap(32),
-              Text(
-                "Meu app",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurpleAccent,
-                  letterSpacing: 2,
-                ),
-              ),
-              Gap(16),
+              DoseeLogo(),
+              Gap(128),
               Text(
                 "Bem-vindo!",
                 style: TextStyle(fontSize: 22, color: Colors.white),

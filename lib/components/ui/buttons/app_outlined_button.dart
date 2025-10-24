@@ -16,9 +16,9 @@ class AppOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        backgroundColor: AppColors.blueSecondary,
+        backgroundColor: Colors.transparent,
         side: BorderSide(color: AppColors.blueSecondary, width: 2),
-        foregroundColor: AppColors.blueSecondary,
+        foregroundColor: AppColors.blueLight1,
         padding: EdgeInsets.symmetric(vertical: padding ?? 16),
       ),
       onPressed: onPressed,
