@@ -21,12 +21,6 @@ class HomeScreen extends StatelessWidget {
               // ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/team');
-                },
-                child: Text('equipe'),
-              ),
-              TextButton(
-                onPressed: () {
                   Navigator.pushNamed(context, '/about');
                 },
                 child: Text('about'),

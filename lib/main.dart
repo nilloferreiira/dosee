@@ -1,3 +1,4 @@
+import 'package:dosee/screens/about_app/about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/screens/auth/login_screen.dart';
 import 'package:dosee/screens/auth/welcome_screen.dart';
@@ -17,6 +18,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ME Project',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black, // fundo mais escuro
         appBarTheme: AppBarTheme(
@@ -32,6 +34,7 @@ class MainApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/': (context) => HomeScreen(),
         '/team': (context) => TeamScreen(),
+        '/about': (context) => AboutScreen(),
       },
     );
   }

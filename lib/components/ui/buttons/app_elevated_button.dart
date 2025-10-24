@@ -1,3 +1,4 @@
+import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppElevatedButton extends StatelessWidget {
@@ -15,7 +16,7 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: AppColors.blueSecondary,
         foregroundColor: Colors.white,
         padding: EdgeInsets.symmetric(vertical: 16),
       ),

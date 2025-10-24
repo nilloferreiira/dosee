@@ -9,7 +9,7 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 16),
-      child: Text(text, style: TextStyle(fontSize: 64)),
+      child: Text(text, style: TextStyle(fontSize: 48)),
     );
   }
 }

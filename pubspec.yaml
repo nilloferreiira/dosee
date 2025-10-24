@@ -23,6 +23,9 @@ flutter:
   assets:
     - assets/images/image.png
     - assets/images/splash.png
+    - assets/images/pill-1.png
+    - assets/images/pill-2.png
+    - assets/images/pill-3.png
 
 flutter_native_splash:
   color: "#000000" # cor de fundo

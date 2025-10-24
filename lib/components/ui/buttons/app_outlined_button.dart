@@ -1,3 +1,4 @@
+import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppOutlinedButton extends StatelessWidget {
@@ -15,11 +16,9 @@ class AppOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        backgroundColor: Colors.deepPurpleAccent.shade700.withValues(
-          alpha: 0.2,
-        ),
-        side: BorderSide(color: Colors.deepPurpleAccent, width: 2),
-        foregroundColor: Colors.deepPurpleAccent,
+        backgroundColor: AppColors.blueSecondary,
+        side: BorderSide(color: AppColors.blueSecondary, width: 2),
+        foregroundColor: AppColors.blueSecondary,
         padding: EdgeInsets.symmetric(vertical: padding ?? 16),
       ),
       onPressed: onPressed,

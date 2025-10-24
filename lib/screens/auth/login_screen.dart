@@ -1,3 +1,4 @@
+import 'package:dosee/components/ui/private/title.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
@@ -47,11 +48,21 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: EdgeInsets.all(48),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Align(
                 alignment: Alignment.topCenter,
-                child: Image.asset("assets/images/image.png"),
+                child: Row(
+                  spacing: 16,
+                  children: [
+                    SizedBox(
+                      width: 80, // defina o tamanho que preferir
+                      height: 80,
+                      child: Image.asset("assets/images/pill-3.png"),
+                    ),
+                    PageTitle("Dosee"),
+                  ],
+                ),
               ),
               Form(
                 key: _formKey,
@@ -62,6 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Text("Faça seu login", style: TextStyle(fontSize: 24)),
+                      Gap(16),
+
                       Input(
                         controller: _loginController,
                         hintText: 'Digite seu login',
