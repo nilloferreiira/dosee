@@ -4,7 +4,7 @@
 		{
 			"label": "Iniciar Pixel 4",
 			"type": "shell",
-			"command": "emulator -avd Pixel_4",
+			"command": "$HOME/Android/Sdk/emulator/emulator -avd Pixel_4 & sleep 8",
 			"problemMatcher": []
 		},
 		{
