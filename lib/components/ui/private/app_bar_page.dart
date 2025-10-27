@@ -4,12 +4,14 @@ class AppBarPage extends StatelessWidget {
   final Widget children;
   final bool? showLeading;
   final String title;
+  final Drawer? drawer;
 
   const AppBarPage({
     super.key,
     required this.children,
     required this.title,
     this.showLeading = true,
+    this.drawer,
   });
 
   @override
@@ -24,8 +26,9 @@ class AppBarPage extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
               )
             : null,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: true,
       ),
+      drawer: drawer,
       body: children,
     );
   }

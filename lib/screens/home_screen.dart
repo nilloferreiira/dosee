@@ -11,6 +11,45 @@ class HomeScreen extends StatelessWidget {
 
     return AppBarPage(
       title: "Meus lembretes",
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: AppColors.blueLight1),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Equipe'),
+              onTap: () {
+                Navigator.pushNamed(context, '/team');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('Sobre'),
+              onTap: () {
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Sair'),
+              onTap: () {
+                // ação de logout
+              },
+            ),
+          ],
+        ),
+      ),
       showLeading: false,
       children: Stack(
         alignment: Alignment.topCenter,
