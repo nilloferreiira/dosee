@@ -1,3 +1,4 @@
+import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/components/ui/private/app_bar_page.dart';
 
@@ -6,12 +7,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppBarPage(
-        title: "Home",
-        showLeading: false,
-        children: Center(
-          child: Column(
+    onPressed() {}
+
+    return AppBarPage(
+      title: "Meus lembretes",
+      showLeading: false,
+      children: Stack(
+        alignment: Alignment.topCenter,
+        fit: StackFit.expand,
+        children: [
+          Column(
             children: [
               // TextButton(
               //   onPressed: () {
@@ -27,7 +32,17 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
+          Positioned(
+            bottom: 50,
+            right: 32,
+            child: FloatingActionButton(
+              onPressed: onPressed,
+              backgroundColor: AppColors.blueLight1,
+
+              child: (Icon(Icons.add)),
+            ),
+          ),
+        ],
       ),
     );
   }

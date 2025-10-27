@@ -8,41 +8,39 @@ class TeamScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppBarPage(
-        title: "Equipe",
-        children: Center(
-          child: ListView(
-            padding: EdgeInsets.all(16),
-            children: [
-              Text(
-                'Conheça nossa equipe',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  letterSpacing: 1.2,
-                ),
-                textAlign: TextAlign.center,
+    return AppBarPage(
+      title: "Equipe",
+      children: Center(
+        child: ListView(
+          padding: EdgeInsets.all(16),
+          children: [
+            Text(
+              'Conheça nossa equipe',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1.2,
               ),
-              Gap(32),
-              CardTeam(
-                title: 'Danillo Ferreira',
-                description: 'Criador do aplicativo',
-                image: 'https://github.com/nilloferreiira.png',
-              ),
-              CardTeam(
-                title: 'Danillo Ferreira',
-                description: 'Desenvolvedor do aplicativo',
-                image: 'https://github.com/nilloferreiira.png',
-              ),
-              CardTeam(
-                title: 'Danillo Ferreira',
-                description: 'Designer do aplicativo',
-                image: 'https://github.com/nilloferreiira.png',
-              ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+            Gap(32),
+            CardTeam(
+              title: 'Danillo Ferreira',
+              description: 'Criador do aplicativo',
+              image: 'https://github.com/nilloferreiira.png',
+            ),
+            CardTeam(
+              title: 'Danillo Ferreira',
+              description: 'Desenvolvedor do aplicativo',
+              image: 'https://github.com/nilloferreiira.png',
+            ),
+            CardTeam(
+              title: 'Danillo Ferreira',
+              description: 'Designer do aplicativo',
+              image: 'https://github.com/nilloferreiira.png',
+            ),
+          ],
         ),
       ),
     );
