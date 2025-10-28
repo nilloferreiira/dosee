@@ -1,3 +1,6 @@
+import 'package:dosee/components/reminders_list.dart';
+import 'package:dosee/components/ui/card/reminder_card.dart';
+import 'package:dosee/models/reminder.dart';
 import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/components/ui/private/app_bar_page.dart';
@@ -55,21 +58,45 @@ class HomeScreen extends StatelessWidget {
         alignment: Alignment.topCenter,
         fit: StackFit.expand,
         children: [
-          Column(
-            children: [
-              // TextButton(
-              //   onPressed: () {
-              //     Navigator.pushNamed(context, '/login');
-              //   },
-              //   child: Text('login'),
-              // ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                child: Text('about'),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ReminderCard(
+                  title: 'Rivotril',
+                  description: 'ta no armario',
+                  alarmTime: DateTime(2025, 9, 21, 17, 30),
+                ),
+                RemindersList(
+                  items: [
+                    Reminder(
+                      id: '1',
+                      title: 'Rivotril',
+                      description: 'Tá no armário',
+                      alarmTime: DateTime(
+                        DateTime.now().year,
+                        DateTime.now().month,
+                        DateTime.now().day,
+                        19, // hora
+                        0, // minuto
+                      ),
+                    ),
+                    Reminder(
+                      id: '2',
+                      title: 'Dipirona',
+                      description: 'Depois do almoço',
+                      alarmTime: DateTime(
+                        DateTime.now().year,
+                        DateTime.now().month,
+                        DateTime.now().day,
+                        13, // hora
+                        0, // minuto
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           Positioned(
             bottom: 50,
