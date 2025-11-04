@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 class ReminderCard extends StatelessWidget {
   final String title;
   final String description;
-  //TODO mudar para date?
   final DateTime alarmTime;
 
   const ReminderCard({
