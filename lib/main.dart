@@ -13,7 +13,7 @@ void main() async {
   NotificationService().initNotifications();
 
   // Ask for notifications permission
-  await notificationPermissionHelper();
+  await notificationPermissionHandler();
 
   // MultiProvider
 
