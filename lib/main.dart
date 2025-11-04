@@ -1,4 +1,5 @@
 import 'package:dosee/screens/about_app/about_screen.dart';
+import 'package:dosee/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/screens/auth/login_screen.dart';
 import 'package:dosee/screens/auth/welcome_screen.dart';
@@ -6,6 +7,10 @@ import 'package:dosee/screens/home_screen.dart';
 import 'package:dosee/screens/team/team_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // init notifications
+  NotificationService().initNotifications();
+
   // MultiProvider
 
   runApp(const MainApp());
