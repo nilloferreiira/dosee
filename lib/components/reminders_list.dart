@@ -37,6 +37,7 @@ class _RemindersListState extends State<RemindersList> {
               // por exemplo, remover da lista
               setState(() {
                 items.remove(item);
+                // remove notification
               });
 
               ScaffoldMessenger.of(

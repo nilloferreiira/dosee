@@ -1,3 +1,4 @@
+import 'package:dosee/helpers/permission_helper.dart';
 import 'package:dosee/screens/about_app/about_screen.dart';
 import 'package:dosee/services/notification_service.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +7,13 @@ import 'package:dosee/screens/auth/welcome_screen.dart';
 import 'package:dosee/screens/home_screen.dart';
 import 'package:dosee/screens/team/team_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // init notifications
   NotificationService().initNotifications();
+
+  // Ask for notifications permission
+  await notificationPermissionHelper();
 
   // MultiProvider
 

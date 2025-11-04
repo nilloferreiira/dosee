@@ -1,6 +1,7 @@
 import 'package:dosee/components/reminders_list.dart';
-import 'package:dosee/components/ui/card/reminder_card.dart';
+import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
 import 'package:dosee/models/reminder.dart';
+import 'package:dosee/services/notification_service.dart';
 import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/components/ui/private/app_bar_page.dart';
@@ -62,10 +63,19 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                ReminderCard(
-                  title: 'Rivotril',
-                  description: 'ta no armario',
-                  alarmTime: DateTime(2025, 9, 21, 17, 30),
+                SizedBox(
+                  height: 64,
+                  width: 96,
+                  child: AppElevatedButton(
+                    text: 'receba',
+                    color: AppColors.bluePrimary,
+                    onPressed: () {
+                      NotificationService().showNotification(
+                        title: 'receba',
+                        body: 'É o cara da luva passando',
+                      );
+                    },
+                  ),
                 ),
                 RemindersList(
                   items: [

@@ -54,11 +54,16 @@ class NotificationService {
     String? title,
     String? body,
   }) async {
-    return notificationPlugin.show(
-      id,
-      title,
-      body,
-      const NotificationDetails(),
-    );
+    // return notificationPlugin.show(id, title, body, notificationDetails());
+    try {
+      print('Tentando mostrar notificação: id=$id, title=$title, body=$body');
+      final details = notificationDetails();
+      print('NotificationDetails: $details');
+      await notificationPlugin.show(id, title, body, details);
+      print('Notificação enviada!');
+    } catch (e, s) {
+      print('Erro ao mostrar notificação: $e');
+      print('Stacktrace: $s');
+    }
   }
 }
