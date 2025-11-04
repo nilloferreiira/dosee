@@ -44,15 +44,24 @@ class WelcomeScreen extends StatelessWidget {
                   text: "Cadastrar-se",
                 ),
               ),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: AppOutlinedButton(
-              //     onPressed: () {
-              //       Navigator.pushNamed(context, '/register');
-              //     },
-              //     text: "Cadastrar-se",
-              //   ),
-              // ),
+              Gap(24),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {
+                    //TODO configuracao do user as guest
+                    Navigator.of(context).pushReplacementNamed("/");
+                  },
+                  child: Text(
+                    "Entrar como convidado",
+                    style: TextStyle(
+                      color: AppColors.blueLight2,
+                      fontSize: 16,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

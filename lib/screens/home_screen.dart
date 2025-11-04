@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
               leading: Icon(Icons.logout),
               title: Text('Sair'),
               onTap: () {
-                // ação de logout
+                Navigator.of(context).pushReplacementNamed("/welcome");
               },
             ),
           ],
