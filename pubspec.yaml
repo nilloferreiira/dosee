@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^19.5.0
   flutter_native_splash: ^2.4.6
   gap: ^3.0.1
   provider: ^6.1.5+1
