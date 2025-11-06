@@ -1,5 +1,6 @@
 import 'package:dosee/components/reminders_list.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
+import 'package:dosee/components/ui/buttons/app_outlined_button.dart';
 import 'package:dosee/models/reminder.dart';
 import 'package:dosee/services/notification_service.dart';
 import 'package:dosee/styles/app_colors.dart';
@@ -44,6 +45,14 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/about');
               },
             ),
+            //TODO remover esse botao
+            ListTile(
+              leading: Icon(Icons.dangerous),
+              title: Text('Cancelar todas as notificações'),
+              onTap: () {
+                NotificationService().cancelAllNotifications();
+              },
+            ),
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('Sair'),
@@ -73,6 +82,23 @@ class HomeScreen extends StatelessWidget {
                       NotificationService().showNotification(
                         title: 'receba',
                         body: 'É o cara da luva passando',
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 64,
+                  width: 200,
+                  child: AppOutlinedButton(
+                    text: 'receba na hora exata pae',
+                    onPressed: () async {
+                      NotificationService().scheduleNotification(
+                        id: 3,
+                        title: 'receba',
+                        body:
+                            'É notificação passando no horario agendado as 23:07',
+                        hour: 23,
+                        minute: 07,
                       );
                     },
                   ),

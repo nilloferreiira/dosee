@@ -1,4 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/standalone.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 class NotificationService {
   final notificationPlugin = FlutterLocalNotificationsPlugin();
@@ -11,6 +15,11 @@ class NotificationService {
   Future<void> initNotifications() async {
     if (_isInitialized) return; // prevent initialization
 
+    // init timezone handling
+    tz.initializeTimeZones();
+    final currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone.identifier));
+    // print(tz.local);
     // android init settings
     const initSettingsAndroid = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
@@ -55,15 +64,144 @@ class NotificationService {
     String? body,
   }) async {
     // return notificationPlugin.show(id, title, body, notificationDetails());
-    try {
-      print('Tentando mostrar notificação: id=$id, title=$title, body=$body');
-      final details = notificationDetails();
-      print('NotificationDetails: $details');
-      await notificationPlugin.show(id, title, body, details);
-      print('Notificação enviada!');
-    } catch (e, s) {
-      print('Erro ao mostrar notificação: $e');
-      print('Stacktrace: $s');
+    final details = notificationDetails();
+    await notificationPlugin.show(id, title, body, details);
+  }
+
+  //Schedule a notification at a specfic time
+  Future<void> scheduleNotification({
+    required int id,
+    required String title,
+    required String body,
+    required int hour,
+    required int minute,
+  }) async {
+    // Get the currente date/time
+    final now = tz.TZDateTime.now(tz.local);
+
+    // Create date/time for today the specified hour
+    var scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    if (scheduledDate.isBefore(now) || scheduledDate == now) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
+    print(now);
+    print([id, title, body, scheduledDate]);
+    // Schedule the notification
+    await notificationPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduledDate,
+      notificationDetails(),
+
+      // Android specific configurations
+
+      // para testes use exactAllowWhileIdle; em produção pode preferir inexactAllowWhileIdle
+      // androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+
+      // Make notification repeat DAILY at the same time
+      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+    );
+
+    // Debug: listar notificações agendadas
+    final pending = await notificationPlugin.pendingNotificationRequests();
+    print('Pending notifications (${pending.length}):');
+    for (final p in pending) {
+      print(
+        '  id:${p.id} title:${p.title} body:${p.body} payload:${p.payload}',
+      );
+    }
+
+    print("Notification scheduled");
+  }
+
+  // Schedule reminder in 3 seconds
+  Future<void> scheduleReminder({
+    required int id,
+    required String title,
+    required String body,
+  }) async {
+    // Get the currente date/time
+    TZDateTime now = TZDateTime.now(tz.local);
+    TZDateTime scheduledDate = now.add(Duration(seconds: 3));
+
+    // Create date/time for today the specified hour
+    // var scheduledDate = tz.TZDateTime(
+    //   tz.local,
+    //   now.year,
+    //   now.month,
+    //   now.day,
+    //   hour,
+    //   minute,
+    // );
+
+    // if (scheduledDate.isBefore(now) || scheduledDate == now) {
+    //   scheduledDate = scheduledDate.add(const Duration(days: 1));
+    // }
+
+    print([id, title, body, scheduledDate]);
+    // Schedule the notification
+    await notificationPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduledDate,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'schedule_reminder_channel_id',
+          'Schedule Reminders',
+          channelDescription: 'Reminder to take daily meds',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+
+      // Android specific configurations
+
+      // para testes use exactAllowWhileIdle; em produção pode preferir inexactAllowWhileIdle
+      // androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+
+      // Make notification repeat DAILY at the same time
+      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+    );
+
+    // Debug: listar notificações agendadas
+    final pending = await notificationPlugin.pendingNotificationRequests();
+    print('Pending notifications (${pending.length}):');
+    for (final p in pending) {
+      print(
+        '  id:${p.id} title:${p.title} body:${p.body} payload:${p.payload}',
+      );
+    }
+
+    print("Notification scheduled");
+  }
+
+  // Cancel all notificattions
+  Future<void> cancelAllNotifications() async {
+    await notificationPlugin.cancelAll();
+  }
+
+  // Cancel an specific notification
+  Future<void> cancelNotifications({int id = 0}) async {
+    if (id == 0) return;
+
+    await notificationPlugin.cancel(id);
+  }
+
+  // Get all notifications
+  Future<List<PendingNotificationRequest>> getPendingNotifications() {
+    return notificationPlugin.pendingNotificationRequests();
   }
 }

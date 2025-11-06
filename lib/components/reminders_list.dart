@@ -50,8 +50,8 @@ class _RemindersListState extends State<RemindersList> {
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               alignment: Alignment.centerRight,
+              margin: EdgeInsets.only(bottom: 4, right: 4, top: 4),
               padding: const EdgeInsets.symmetric(horizontal: 20),
-
               child: const Icon(Icons.delete, color: Colors.white),
             ),
             child: ReminderCard(
