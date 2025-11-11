@@ -1,6 +1,8 @@
+import 'package:dosee/components/create_reminder.dart';
 import 'package:dosee/components/reminders_list.dart';
 import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
 import 'package:dosee/components/ui/buttons/app_outlined_button.dart';
+import 'package:dosee/components/ui/dialog/dialog.dart';
 import 'package:dosee/models/reminder.dart';
 import 'package:dosee/services/notification_service.dart';
 import 'package:dosee/styles/app_colors.dart';
@@ -12,7 +14,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    onPressed() {}
+    onPressed() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            AppDialog(title: 'Cadastrar lembrete', children: CreateReminder()),
+      );
+    }
 
     return AppBarPage(
       title: "Meus lembretes",

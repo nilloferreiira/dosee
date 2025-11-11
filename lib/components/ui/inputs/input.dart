@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class Input extends StatelessWidget {
   final TextEditingController? controller;
   final EdgeInsets? padding;
+  final double? fontSize;
   final String? hintText;
   final String? Function(String?)? validator;
 
@@ -12,6 +13,7 @@ class Input extends StatelessWidget {
     this.controller,
     this.padding,
     this.hintText,
+    this.fontSize = 20,
     this.validator,
   });
 
@@ -20,7 +22,7 @@ class Input extends StatelessWidget {
     return TextFormField(
       controller: controller,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: fontSize,
         fontWeight: FontWeight.w400,
         color: Colors.white,
       ),

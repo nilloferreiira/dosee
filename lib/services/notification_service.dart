@@ -124,6 +124,75 @@ class NotificationService {
     print("Notification scheduled");
   }
 
+  Future<void> scheduleWeeklyNotifications({
+    required int id,
+    required String title,
+    required String body,
+    required int hour,
+    required int minute,
+    required List<int> weekdays, // dias da semana selecionados pelo usuário
+  }) async {
+    final now = tz.TZDateTime.now(tz.local);
+
+    for (final weekday in weekdays) {
+      // Calcula a próxima ocorrência do dia da semana
+      tz.TZDateTime scheduledDate = _nextInstanceOfWeekday(
+        hour,
+        minute,
+        weekday,
+        now,
+      );
+
+      // Use um id diferente para cada dia
+      await notificationPlugin.zonedSchedule(
+        id,
+        title,
+        body,
+        scheduledDate,
+        notificationDetails(),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+      );
+
+      print(
+        'Agendada notificação para $scheduledDate (weekday=$weekday, id=$id)',
+      );
+    }
+
+    // Debug: listar notificações agendadas
+    final pending = await notificationPlugin.pendingNotificationRequests();
+    print('Pending notifications (${pending.length}):');
+    for (final p in pending) {
+      print(
+        '  id:${p.id} title:${p.title} body:${p.body} payload:${p.payload}',
+      );
+    }
+  }
+
+  // Função utilitária para calcular a próxima ocorrência de um dia da semana
+  tz.TZDateTime _nextInstanceOfWeekday(
+    int hour,
+    int minute,
+    int weekday,
+    tz.TZDateTime now,
+  ) {
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    // weekday: 1=segunda, 7=domingo
+    while (scheduledDate.weekday != weekday || scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
+  }
+
+  //* APAGAR
   // Schedule reminder in 3 seconds
   Future<void> scheduleReminder({
     required int id,
