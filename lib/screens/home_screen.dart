@@ -78,66 +78,31 @@ class HomeScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 64,
-                  width: 96,
-                  child: AppElevatedButton(
-                    text: 'receba',
-                    color: AppColors.bluePrimary,
-                    onPressed: () {
-                      NotificationService().showNotification(
-                        title: 'receba',
-                        body: 'É o cara da luva passando',
-                      );
-                    },
+            child: RemindersList(
+              items: [
+                Reminder(
+                  id: '1',
+                  title: 'Rivotril',
+                  description: 'Tá no armário',
+                  alarmTime: DateTime(
+                    DateTime.now().year,
+                    DateTime.now().month,
+                    DateTime.now().day,
+                    19, // hora
+                    0, // minuto
                   ),
                 ),
-                SizedBox(
-                  height: 64,
-                  width: 200,
-                  child: AppOutlinedButton(
-                    text: 'receba na hora exata pae',
-                    onPressed: () async {
-                      NotificationService().scheduleNotification(
-                        id: 3,
-                        title: 'receba',
-                        body:
-                            'É notificação passando no horario agendado as 23:07',
-                        hour: 23,
-                        minute: 07,
-                      );
-                    },
+                Reminder(
+                  id: '2',
+                  title: 'Dipirona',
+                  description: 'Depois do almoço',
+                  alarmTime: DateTime(
+                    DateTime.now().year,
+                    DateTime.now().month,
+                    DateTime.now().day,
+                    13, // hora
+                    0, // minuto
                   ),
-                ),
-                RemindersList(
-                  items: [
-                    Reminder(
-                      id: '1',
-                      title: 'Rivotril',
-                      description: 'Tá no armário',
-                      alarmTime: DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        19, // hora
-                        0, // minuto
-                      ),
-                    ),
-                    Reminder(
-                      id: '2',
-                      title: 'Dipirona',
-                      description: 'Depois do almoço',
-                      alarmTime: DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        13, // hora
-                        0, // minuto
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
