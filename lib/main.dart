@@ -25,14 +25,6 @@ void main() async {
   // Ask for notifications permission
   await notificationPermissionHandler();
 
-  // MultiProvider
-
-  // runApp(
-  //   MultiProvider(
-  //     providers: [ChangeNotifierProvider(create: (_) => RemindersProvider ())],
-  //     child: const MainApp(),
-  //   ),
-  // );
   runApp(const MainApp());
 }
 
