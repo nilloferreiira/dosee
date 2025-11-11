@@ -1,24 +1,50 @@
 import 'package:dosee/components/create_reminder.dart';
+import 'package:dosee/components/reminders.dart';
 import 'package:dosee/components/reminders_list.dart';
-import 'package:dosee/components/ui/buttons/app_elevated_button.dart';
-import 'package:dosee/components/ui/buttons/app_outlined_button.dart';
 import 'package:dosee/components/ui/dialog/dialog.dart';
 import 'package:dosee/models/reminder.dart';
 import 'package:dosee/services/notification_service.dart';
+import 'package:dosee/services/reminders_service.dart';
 import 'package:dosee/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dosee/components/ui/private/app_bar_page.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _remindersService = RemindersService();
+  bool _isLoading = true;
+  List<Reminder> reminders = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReminders();
+  }
+
+  Future<void> _loadReminders() async {
+    final loaded = await _remindersService.getAllReminders();
+    setState(() {
+      reminders = loaded;
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     onPressed() {
       showDialog(
         context: context,
-        builder: (BuildContext context) =>
-            AppDialog(title: 'Cadastrar lembrete', children: CreateReminder()),
+        builder: (BuildContext context) => AppDialog(
+          title: 'Cadastrar lembrete',
+          children: CreateReminder(onSaved: _loadReminders),
+        ),
+        //TODO implementar actions
       );
     }
 
@@ -78,34 +104,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: RemindersList(
-              items: [
-                Reminder(
-                  id: '1',
-                  title: 'Rivotril',
-                  description: 'Tá no armário',
-                  alarmTime: DateTime(
-                    DateTime.now().year,
-                    DateTime.now().month,
-                    DateTime.now().day,
-                    19, // hora
-                    0, // minuto
-                  ),
-                ),
-                Reminder(
-                  id: '2',
-                  title: 'Dipirona',
-                  description: 'Depois do almoço',
-                  alarmTime: DateTime(
-                    DateTime.now().year,
-                    DateTime.now().month,
-                    DateTime.now().day,
-                    13, // hora
-                    0, // minuto
-                  ),
-                ),
-              ],
-            ),
+            child: _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : reminders.isEmpty
+                ? Center(child: Text("Nenhum lembrete"))
+                : RemindersList(items: reminders, onSaved: _loadReminders),
           ),
           Positioned(
             bottom: 50,
@@ -122,27 +125,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-// Column(
-//             children: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.pushNamed(context, '/login');
-//                 },
-//                 child: Text('login'),
-//               ),
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.pushNamed(context, '/team');
-//                 },
-//                 child: Text('equipe'),
-//               ),
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.pushNamed(context, '/about');
-//                 },
-//                 child: Text('about'),
-//               ),
-//             ],
-//           )

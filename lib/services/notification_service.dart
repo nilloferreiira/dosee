@@ -143,9 +143,11 @@ class NotificationService {
         now,
       );
 
+      final notificationId = id * 10 + weekday;
+
       // Use um id diferente para cada dia
       await notificationPlugin.zonedSchedule(
-        id,
+        notificationId,
         title,
         body,
         scheduledDate,
@@ -192,78 +194,13 @@ class NotificationService {
     return scheduledDate;
   }
 
-  //* APAGAR
-  // Schedule reminder in 3 seconds
-  Future<void> scheduleReminder({
-    required int id,
-    required String title,
-    required String body,
-  }) async {
-    // Get the currente date/time
-    TZDateTime now = TZDateTime.now(tz.local);
-    TZDateTime scheduledDate = now.add(Duration(seconds: 3));
-
-    // Create date/time for today the specified hour
-    // var scheduledDate = tz.TZDateTime(
-    //   tz.local,
-    //   now.year,
-    //   now.month,
-    //   now.day,
-    //   hour,
-    //   minute,
-    // );
-
-    // if (scheduledDate.isBefore(now) || scheduledDate == now) {
-    //   scheduledDate = scheduledDate.add(const Duration(days: 1));
-    // }
-
-    print([id, title, body, scheduledDate]);
-    // Schedule the notification
-    await notificationPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduledDate,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'schedule_reminder_channel_id',
-          'Schedule Reminders',
-          channelDescription: 'Reminder to take daily meds',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(),
-      ),
-
-      // Android specific configurations
-
-      // para testes use exactAllowWhileIdle; em produção pode preferir inexactAllowWhileIdle
-      // androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-
-      // Make notification repeat DAILY at the same time
-      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-    );
-
-    // Debug: listar notificações agendadas
-    final pending = await notificationPlugin.pendingNotificationRequests();
-    print('Pending notifications (${pending.length}):');
-    for (final p in pending) {
-      print(
-        '  id:${p.id} title:${p.title} body:${p.body} payload:${p.payload}',
-      );
-    }
-
-    print("Notification scheduled");
-  }
-
   // Cancel all notificattions
   Future<void> cancelAllNotifications() async {
     await notificationPlugin.cancelAll();
   }
 
   // Cancel an specific notification
-  Future<void> cancelNotifications({int id = 0}) async {
+  Future<void> cancelNotifications(int id) async {
     if (id == 0) return;
 
     await notificationPlugin.cancel(id);

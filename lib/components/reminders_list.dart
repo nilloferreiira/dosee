@@ -1,44 +1,33 @@
 import 'package:dosee/components/ui/card/reminder_card.dart';
 import 'package:dosee/models/reminder.dart';
+import 'package:dosee/services/notification_service.dart';
+import 'package:dosee/services/reminders_service.dart';
 import 'package:flutter/material.dart';
 
-class RemindersList extends StatefulWidget {
+class RemindersList extends StatelessWidget {
   final List<Reminder> items;
+  final VoidCallback? onSaved;
 
-  const RemindersList({super.key, required this.items});
-
-  @override
-  State<RemindersList> createState() => _RemindersListState();
-}
-
-class _RemindersListState extends State<RemindersList> {
-  late List<Reminder> items;
-
-  @override
-  void initState() {
-    super.initState();
-    items = List.from(widget.items);
-  }
+  const RemindersList({super.key, required this.items, this.onSaved});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox.expand(
       child: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
-          final item = items[index];
+          final Reminder item = items[index];
 
           return Dismissible(
-            key: Key(item.id), // precisa de uma chave única
-            direction: DismissDirection
-                .endToStart, // direção do swipe (ex: direita → esquerda)
-            onDismissed: (direction) {
-              // ação quando o item for arrastado
-              // por exemplo, remover da lista
-              setState(() {
-                items.remove(item);
-                // remove notification
-              });
+            key: Key(item.id.toString()),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) async {
+              await RemindersService().deleteReminder(item.id!);
+              for (final weekday in item.weekdays) {
+                final notificationId = item.id! * 10 + weekday;
+                await NotificationService().cancelNotifications(notificationId);
+              }
+              if (onSaved != null) onSaved!();
 
               ScaffoldMessenger.of(
                 context,
@@ -57,7 +46,14 @@ class _RemindersListState extends State<RemindersList> {
             child: ReminderCard(
               title: item.title,
               description: item.description,
-              alarmTime: item.alarmTime,
+              time: item.time,
+              weekdays: item.weekdays,
+              isCompleted: item.isCompleted,
+              onCompleted: () async {
+                item.isCompleted = !item.isCompleted;
+                await RemindersService().updateReminder(item);
+                if (onSaved != null) onSaved!();
+              },
             ),
           );
         },
