@@ -1,5 +1,4 @@
 import 'package:dosee/components/create_reminder.dart';
-import 'package:dosee/components/reminders.dart';
 import 'package:dosee/components/reminders_list.dart';
 import 'package:dosee/components/ui/dialog/dialog.dart';
 import 'package:dosee/models/reminder.dart';

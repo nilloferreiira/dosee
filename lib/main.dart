@@ -20,7 +20,7 @@ void main() async {
   // await Hive.openBox("REMINDERS_BOX");
 
   // init notifications
-  NotificationService().initNotifications();
+  await NotificationService().initNotifications();
 
   // Ask for notifications permission
   await notificationPermissionHandler();
