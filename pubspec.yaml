@@ -17,6 +17,7 @@ dependencies:
   hive_ce_flutter: ^2.3.3
   permission_handler: ^12.0.1
   timezone: ^0.10.1
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:
