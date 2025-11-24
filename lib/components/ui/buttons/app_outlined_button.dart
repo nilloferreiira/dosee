@@ -23,13 +23,15 @@ class AppOutlinedButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         side: BorderSide(color: AppColors.blueLight1, width: 2),
         foregroundColor: AppColors.blueLight1,
-        padding: EdgeInsets.symmetric(vertical: padding ?? 16),
+        padding: EdgeInsets.symmetric(vertical: padding ?? 12, horizontal: 16),
+        minimumSize: Size(64, 40),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        textStyle: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
       ),
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
+        // Text style is provided by the button style's textStyle
       ),
     );
   }

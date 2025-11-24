@@ -24,14 +24,13 @@ class AppElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: EdgeInsets.symmetric(vertical: padding ?? 16, horizontal: 20),
+        minimumSize: Size(64, 40),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        textStyle: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
       ),
       onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
-      ),
+      child: Text(text),
     );
   }
 }
