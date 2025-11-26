@@ -78,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       Input(
                         controller: _loginController,
-                        hintText: 'Digite seu login',
+                        hintText: 'Digite seu e-mail',
                         validator: (value) => value == null || value.isEmpty
-                            ? 'Por favor, insira seu login'
+                            ? 'Por favor, insira seu e-mail'
                             : null,
                       ),
                       Gap(24),
